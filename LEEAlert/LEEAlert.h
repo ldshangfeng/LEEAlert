@@ -359,6 +359,9 @@ NS_ASSUME_NONNULL_BEGIN
 /** action边框位置 */
 @property (nonatomic , assign ) LEEActionBorderPosition borderPosition;
 
+/** action内容对齐 */
+@property(nonatomic , assign ) UIControlContentHorizontalAlignment contentHorizontalAlignment;
+
 /** action点击不关闭 (仅适用于默认类型) */
 @property (nonatomic , assign ) BOOL isClickNotClose;
 

@@ -1228,6 +1228,8 @@ typedef NS_ENUM(NSInteger, LEEBackgroundStyle) {
     if (action.height) [self setActionHeight:action.height];
     
     if (action.cornerRadius) [self.layer setCornerRadius:action.cornerRadius];
+
+    self.contentHorizontalAlignment = action.contentHorizontalAlignment;
     
     [self setImageEdgeInsets:action.imageEdgeInsets];
     
