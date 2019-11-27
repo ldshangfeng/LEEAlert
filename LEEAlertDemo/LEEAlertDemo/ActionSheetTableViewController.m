@@ -81,6 +81,8 @@
     
     [baseArray addObject:@{@"title" : @"显示一个自定义动画样式的 actionSheet 菜单" , @"content" : @"动画样式可设置动画方向, 淡入淡出, 缩放等"}];
     
+    [baseArray addObject:@{@"title" : @"显示一个mask圆角的 actionSheet 菜单" , @"content" : @"通过CornerRadii指定各个圆角半径"}];
+    
     [demoArray addObject:@{@"title" : @"显示一个蓝色自定义风格的 actionSheet 菜单" , @"content" : @"菜单背景等颜色均可以自定义"}];
     
     [demoArray addObject:@{@"title" : @"显示一个类似微信布局的 actionSheet 菜单" , @"content" : @"只需要调整最大宽度,取消action的间隔颜色和底部间距即可"}];
@@ -512,6 +514,28 @@
         }
             break;
             
+        case 14:
+        {
+            [LEEAlert actionsheet].config
+            .LeeTitle(@"标题")
+            .LeeContent(@"内容")
+            .LeeCancelAction(@"取消", ^{
+                
+                // 取消点击事件Block
+            })
+            .LeeAction(@"确认", ^{
+                
+                // 确认点击事件Block
+            })
+            // 在ActionSheet中 由于特殊的UI结构 圆角设置方法分为3个, 分别控制整体, 头部, 取消按钮.
+            //.LeeCornerRadius(20)  // 相当于于LeeCornerRadii
+            .LeeCornerRadii(CornerRadiiZero())   // 指定整体圆角半径 基于LayerMask实现
+            .LeeActionSheetHeaderCornerRadii(CornerRadiiMake(50, 20, 10, 10)) // 指定头部圆角半径
+            .LeeActionSheetCancelActionCornerRadii(CornerRadiiMake(10, 20, 10, 10)) // 指定取消按钮圆角半径
+            .LeeShow(); // 设置完成后 别忘记调用Show来显示
+        }
+            break;
+            
         default:
             break;
     }
@@ -572,6 +596,9 @@
                 };
             })
             .LeeHeaderColor(blueColor)
+            #ifdef __IPHONE_13_0
+            .LeeUserInterfaceStyle(UIUserInterfaceStyleLight)
+            #endif
             .LeeShow();
         }
             break;
@@ -596,7 +623,9 @@
             })
             .LeeActionSheetCancelActionSpaceColor([UIColor colorWithWhite:0.92 alpha:1.0f]) // 设置取消按钮间隔的颜色
             .LeeActionSheetBottomMargin(0.0f) // 设置底部距离屏幕的边距为0
-            .LeeCornerRadius(0.0f) // 设置圆角曲率为0
+            .LeeCornerRadii(CornerRadiiMake(10, 10, 0, 0))   // 指定整体圆角半径
+            .LeeActionSheetHeaderCornerRadii(CornerRadiiZero()) // 指定头部圆角半径
+            .LeeActionSheetCancelActionCornerRadii(CornerRadiiZero()) // 指定取消按钮圆角半径
             .LeeConfigMaxWidth(^CGFloat(LEEScreenOrientationType type) {
                 
                 // 这是最大宽度为屏幕宽度 (横屏和竖屏)
@@ -604,6 +633,9 @@
                 return CGRectGetWidth([[UIScreen mainScreen] bounds]);
             })
             .LeeActionSheetBackgroundColor([UIColor whiteColor]) // 通过设置背景颜色来填充底部间隙
+            #ifdef __IPHONE_13_0
+            .LeeUserInterfaceStyle(UIUserInterfaceStyleLight)
+            #endif
             .LeeShow();
         }
             break;
@@ -637,6 +669,9 @@
                 
                 action.titleColor = [UIColor grayColor];
             })
+            #ifdef __IPHONE_13_0
+            .LeeUserInterfaceStyle(UIUserInterfaceStyleLight)
+            #endif
             .LeeShow();
         }
             break;
@@ -676,6 +711,9 @@
                 
                 return type == LEEScreenOrientationTypeHorizontal ? CGRectGetHeight([[UIScreen mainScreen] bounds]) : CGRectGetWidth([[UIScreen mainScreen] bounds]);
             })
+            #ifdef __IPHONE_13_0
+            .LeeUserInterfaceStyle(UIUserInterfaceStyleLight)
+            #endif
             .LeeShow();
         }
             break;
@@ -730,6 +768,9 @@
                 
                 return CGRectGetWidth([[UIScreen mainScreen] bounds]);
             })
+            #ifdef __IPHONE_13_0
+            .LeeUserInterfaceStyle(UIUserInterfaceStyleLight)
+            #endif
             .LeeShow();
         }
             break;
@@ -815,6 +856,9 @@
                 
                 return CGRectGetWidth([[UIScreen mainScreen] bounds]);
             })
+            #ifdef __IPHONE_13_0
+            .LeeUserInterfaceStyle(UIUserInterfaceStyleLight)
+            #endif
             .LeeShow();
         }
             break;
@@ -904,6 +948,9 @@
                 }];
                 
             })
+            #ifdef __IPHONE_13_0
+            .LeeUserInterfaceStyle(UIUserInterfaceStyleLight)
+            #endif
             .LeeShow();
         }
             break;

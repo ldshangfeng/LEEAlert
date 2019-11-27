@@ -90,6 +90,8 @@
     
     [baseArray addObject:@{@"title" : @"显示一个带Masonry布局的自定义视图的 alert 弹框" , @"content" : @"模拟2秒后自定义视图约束发生变化"}];
     
+    [baseArray addObject:@{@"title" : @"显示一个mask圆角的 alert 弹框" , @"content" : @"通过CornerRadii指定各个圆角半径"}];
+    
     [demoArray addObject:@{@"title" : @"显示一个蓝色自定义风格的 alert 弹框" , @"content" : @"弹框背景等颜色均可以自定义"}];
     
     [demoArray addObject:@{@"title" : @"显示一个分享登录的 alert 弹框" , @"content" : @"类似某些复杂内容的弹框 可以通过封装成自定义视图来显示"}];
@@ -162,7 +164,12 @@
                 
                 textField.placeholder = @"输入框";
                 
-                textField.textColor = [UIColor darkGrayColor];
+                if (@available(iOS 13.0, *)) {
+                    textField.textColor = [UIColor secondaryLabelColor];
+                    
+                } else {
+                    textField.textColor = [UIColor darkGrayColor];
+                }
                 
                 tf = textField; //赋值
             })
@@ -284,7 +291,12 @@
                 
                 label.text = @"已经退出该群组";
                 
-                label.textColor = [UIColor darkGrayColor];
+                if (@available(iOS 13.0, *)) {
+                    label.textColor = [UIColor secondaryLabelColor];
+                    
+                } else {
+                    label.textColor = [UIColor darkGrayColor];
+                }
                 
                 label.textAlignment = NSTextAlignmentLeft;
             })
@@ -692,6 +704,25 @@
         }
             break;
             
+        case 17:
+        {
+            [LEEAlert alert].config
+            .LeeTitle(@"标题")
+            .LeeContent(@"内容")
+            .LeeCancelAction(@"取消", ^{
+                
+                // 取消点击事件Block
+            })
+            .LeeAction(@"确认", ^{
+                
+                // 确认点击事件Block
+            })
+//            .LeeCornerRadius(20)  // 优先级低于LeeCornerRadii
+            .LeeCornerRadii(CornerRadiiMake(50, 20, 10, 10))   // 指定圆角半径 基于LayerMask实现 优先级高于
+            .LeeShow(); // 设置完成后 别忘记调用Show来显示
+        }
+            break;
+            
         default:
             break;
     }
@@ -752,6 +783,9 @@
                 };
             })
             .LeeHeaderColor(blueColor)
+            #ifdef __IPHONE_13_0
+            .LeeUserInterfaceStyle(UIUserInterfaceStyleLight)
+            #endif
             .LeeShow();
         }
             break;
@@ -783,6 +817,9 @@
                 
                 action.titleColor = [UIColor grayColor];
             })
+            #ifdef __IPHONE_13_0
+            .LeeUserInterfaceStyle(UIUserInterfaceStyleLight)
+            #endif
             .LeeShow();
         }
             break;
@@ -799,6 +836,9 @@
             [LEEAlert alert].config
             .LeeCustomView(view)
             .LeeHeaderInsets(UIEdgeInsetsMake(0, 0, 0, 0))
+            #ifdef __IPHONE_13_0
+            .LeeUserInterfaceStyle(UIUserInterfaceStyleLight)
+            #endif
             .LeeShow();
         }
             break;
@@ -816,6 +856,9 @@
             .LeeCustomView(view)
             .LeeHeaderInsets(UIEdgeInsetsMake(0, 0, 0, 0))
             .LeeHeaderColor([UIColor clearColor])
+            #ifdef __IPHONE_13_0
+            .LeeUserInterfaceStyle(UIUserInterfaceStyleLight)
+            #endif
             .LeeShow();
         }
             break;
@@ -848,6 +891,9 @@
             .LeeItemInsets(UIEdgeInsetsMake(0, 0, 0, 0))
             .LeeHeaderInsets(UIEdgeInsetsMake(10, 0, 0, 0))
             .LeeClickBackgroundClose(YES)
+            #ifdef __IPHONE_13_0
+            .LeeUserInterfaceStyle(UIUserInterfaceStyleLight)
+            #endif
             .LeeShow();
         }
             break;
@@ -971,6 +1017,9 @@
                                         .LeeItemInsets(UIEdgeInsetsMake(0, 0, 0, 0))
                                         .LeeHeaderInsets(UIEdgeInsetsMake(10, 0, 0, 0))
                                         .LeeClickBackgroundClose(YES)
+                                        #ifdef __IPHONE_13_0
+                                        .LeeUserInterfaceStyle(UIUserInterfaceStyleLight)
+                                        #endif
                                         .LeeShow();
                                     
                                     } else {
@@ -988,6 +1037,9 @@
                             .LeeItemInsets(UIEdgeInsetsMake(0, 0, 0, 0))
                             .LeeHeaderInsets(UIEdgeInsetsMake(10, 0, 0, 0))
                             .LeeClickBackgroundClose(YES)
+                            #ifdef __IPHONE_13_0
+                            .LeeUserInterfaceStyle(UIUserInterfaceStyleLight)
+                            #endif
                             .LeeShow();
                         
                         } else {
@@ -1005,6 +1057,9 @@
                 .LeeItemInsets(UIEdgeInsetsMake(0, 0, 0, 0))
                 .LeeHeaderInsets(UIEdgeInsetsMake(10, 0, 0, 0))
                 .LeeClickBackgroundClose(YES)
+                #ifdef __IPHONE_13_0
+                .LeeUserInterfaceStyle(UIUserInterfaceStyleLight)
+                #endif
                 .LeeShow();
             }
             
@@ -1093,6 +1148,9 @@
                 action.cornerRadius = 5.0f;
             })
             .LeeCornerRadius(2.0f)
+            #ifdef __IPHONE_13_0
+            .LeeUserInterfaceStyle(UIUserInterfaceStyleLight)
+            #endif
             .LeeShow();
         }
             break;
@@ -1155,6 +1213,9 @@
             .LeeHeaderInsets(UIEdgeInsetsMake(0, 0, 0, 0))
             .LeeHeaderColor([UIColor colorWithRed:239 / 255.0f green:225 / 255.0f blue:212 / 255.0f alpha:1.0f])
             .LeeClickBackgroundClose(YES)
+            #ifdef __IPHONE_13_0
+            .LeeUserInterfaceStyle(UIUserInterfaceStyleLight)
+            #endif
             .LeeShow();
         }
             break;

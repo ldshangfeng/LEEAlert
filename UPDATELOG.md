@@ -1,6 +1,52 @@
 
 # LEEAlert - 更新日志
 
+V1.3.3
+==============
+增加iOS13 windowScene支持,  在 AppDelegate 或 SceneDelegate 中设置主要Window
+
+```
+[LEEAlert configMainWindow:self.window];
+```
+
+V1.3.2
+==============
+```
+/** 队列是否为空 */
++ (BOOL)isQueueEmpty;
+```
+
+V1.3.1
+==============
+```
+/// 查询队列中是否包含某一标识
++ (BOOL)containsQueueWithIdentifier:(NSString *)identifier;
+```
+
+V1.3.0
+==============
+
+### iOS13
+
+由于iOS13API变化, 目前最低支持Xcode11.
+增加iOS13 Dark样式适配, 默认样式兼容Dark样式. 增加`.LeeUserInterfaceStyle(UIUserInterfaceStyleUnspecified)`方法强制样式类型.
+
+### ActionSheet圆角
+在ActionSheet中 由于特殊的UI结构, 其圆角设置方法分为3个, 分别控制整体, 头部, 取消按钮.
+
+原有的`.LeeCornerRadius(20)`相当于`.LeeCornerRadii(CornerRadiiMake(20, 20, 20, 20))`
+
+增加`.LeeActionSheetHeaderCornerRadii(CornerRadiiMake(13.0f, 13.0f, 13.0f, 13.0f))`方法设置ActionSheet头部圆角
+增加`.LeeActionSheetCancelActionCornerRadii(CornerRadiiMake(13.0f, 13.0f, 13.0f, 13.0f))`方法设置ActionSheet取消按钮圆角
+
+V1.2.8
+==============
+增加是否可滑动开关 `.LeeIsScrollEnabled(YES)`
+
+V1.2.7
+==============
+增加`.LeeCornerRadii(CornerRadiiMake(13.0f, 13.0f, 13.0f, 13.0f))` 圆角半径设置方法 支持4个圆角不同半径的设置
+
 V1.2.6
 ==============
 自定义视图增加AutoLayout布局类型支持, 优化内部布局计算
