@@ -1,6 +1,47 @@
 
 # LEEAlert - 更新日志
 
+V1.4.0
+==============
+`LEEAction`增加 `numberOfLines`  `textAlignment`  `adjustsFontSizeToFitWidth`  `lineBreakMode`属性. 
+
+V1.3.10
+==============
+修复内存泄露
+
+V1.3.9
+==============
+优化自定义视图内部处理 解决iOS10及以下添加AutoLayout布局的自定义视图显示异常的问题.
+```
+// 使用AutoLayout布局的自定义视图 必须设置translatesAutoresizingMaskIntoConstraints=NO
+// 内部会为该视图设置centerXY的约束, 所以请不要为该视图设置关于top left right bottom center等位置相关的约束.
+// 不需要关心该视图位置 只需要保证大小正确即可.
+view.translatesAutoresizingMaskIntoConstraints = NO;
+```
+
+V1.3.8
+==============
+修复崩溃问题
+
+V1.3.7
+==============
+修复Button圆角失效问题 
+
+V1.3.6
+==============
+修复iOS10以下崩溃问题
+
+V1.3.5
+==============
+LEEAction增加 numberOfLines 属性 用于设置title行数
+```
+action.numberOfLines = 2;
+```
+
+V1.3.4
+==============
+优化圆角内部处理
+
 V1.3.3
 ==============
 增加iOS13 windowScene支持,  在 AppDelegate 或 SceneDelegate 中设置主要Window
